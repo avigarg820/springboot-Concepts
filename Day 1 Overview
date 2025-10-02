@@ -1,0 +1,19 @@
+Summary:
+
+COMPONENTS::
+2 packages (1st is -> com.tight.coupling &  2nd is -> com.loose.coupling)
+3 classes in both packages (1st -> interacting with db and has all logic for db , 2nd -> Acts as a usermanager and manages all userinfo including method output from 1st class, 
+3rd -> main psvm Class using manager class and db class methods to print something from db class.)
+1 Interface for understanding loose coupling with the name of {userdataProvider} ##
+
+WORKING:
+TIGHT COUPLING:-> How all 3 classes are linked and dependent on one another. So changing the database in the future will cause 2nd class(UserManager) to change it's code which is not good if we shift to let's say web services. We have to manually change every line of code.
+Loose Coupling-> a). Made an Interface and defined the method with the  name [[GetUserDetails()]]. Only declared name in the interface, not writing any code for implementation->>
+b) Implements the interface in db class means defining logic in the class and writing logic for [[GetUserDetails()]].
+c) Made a constructor in the Usermanager class to pass a class object implementing the interface, performing {Constructor Injection}
+d). In the main class of loose coupling, i.e., psvm-> we instantiate an interface object and assign it to an object of the service class(which is the db class here).
+e). BENIFIT::::So now even if db changes we will just change class and our service result will be printed, no need to change userManager logic.
+
+Syntax: interface_name variablename = new class_name
+eg.  we will use the name of the interface as mentioned above. Locate for ##
+userdataProvider userdata = new UserDatabase();     //here userDatabase is class interacting with db directly in package 2
